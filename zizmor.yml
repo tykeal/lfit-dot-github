@@ -1,0 +1,21 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 The Linux Foundation
+
+# zizmor configuration for the lfit/.github organization workflows.
+#
+# The Gerrit "required" workflows must vote on Gerrit changes using a
+# dedicated SSH service account. That credential is an organization
+# secret consumed directly by the gerrit-review-action; it cannot be
+# scoped to a GitHub deployment environment because environment secrets
+# do not propagate correctly into the reusable workflows these callers
+# invoke (doing so would require "secrets: inherit", which zizmor flags
+# via secrets-inherit). These credentials are therefore allow-listed for
+# the auditor-only secrets-outside-env audit.
+rules:
+  secrets-outside-env:
+    config:
+      allow:
+        - LFIT_GERRIT_SSH_REQUIRED_PRIVKEY
+        - LFIT_GERRIT_SSH_BYPASSABLE_PRIVKEY
+        - RTD_TOKEN
